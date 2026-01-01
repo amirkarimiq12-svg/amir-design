@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<title>Amir Design | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#020617;
+  --purple:#5b21b6;
+  --glass1:rgba(255,255,255,.16);
+  --glass2:rgba(255,255,255,.06);
+  --text:#f8fafc;
+  --muted:#c7d2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 18% 20%, var(--purple), transparent 45%),
+    radial-gradient(circle at 82% 28%, rgba(250,204,21,0.08), transparent 55%),
+    linear-gradient(180deg,#000014,#020617);
+}
+body.fa{font-family:Vazirmatn,system-ui}
+
+header{
+  padding:4rem 2rem;
+  text-align:center;
+}
+header h1{
+  font-size:3rem;
+  margin-bottom:.5rem;
+}
+header p{
+  color:var(--muted);
+  font-size:1.2rem;
+  max-width:850px;
+  margin:auto;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:2.5rem;
+  padding:3rem 2rem;
+  justify-items:center;
+}
+
+.card{
+  background:rgba(255,255,255,.16);
+  border-radius:30px;
+  padding:1.5rem;
+  cursor:pointer;
+  transition:.4s ease;
+  text-align:center;
+  width:100%;
+  max-width:400px;
+}
+.card img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:20px;
+  margin-bottom:1rem;
+}
+.card h3{
+  margin:0 0 .5rem;
+  color:#e9d5ff;
+  font-size:1.3rem;
+}
+.details{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:.4s ease;
+  color:var(--muted);
+  font-size:.95rem;
+  line-height:1.6;
+}
+.card:active .details{
+  max-height:250px;
+  opacity:1;
+  margin-top:.8rem;
+}
+
+button#backBtn{
+  position:fixed;
+  top:22px;
+  left:22px;
+  padding:.55rem 1.4rem;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(135deg,#6d28d9,#312e81);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  z-index:20;
+}
+</style>
+</head>
+<body>
+
+<button id="backBtn">بازگشت / Back</button>
+
+<header>
+  <h1 id="title">Portfolio</h1>
+  <p id="subtitle">
+    A collection of Real Madrid inspired designs and artwork created by Amir Design.
+  </p>
+</header>
+
+<main>
+<div class="grid">
+
+  <div class="card">
+    <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Real Madrid Logo">
+    <h3>Real Madrid Logo Design</h3>
+    <div class="details">
+      Creative redesign and high-quality rendition of the Real Madrid logo, exploring modern digital techniques.
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://i.ibb.co/wB6x7rn/Cristiano-Ronaldo.jpg" alt="Cristiano Ronaldo">
+    <h3>Cristiano Ronaldo Poster</h3>
+    <div class="details">
+      Action poster of Cristiano Ronaldo, showcasing speed, skill, and iconic moments with Photoshop effects.
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://i.ibb.co/4ZJXQXT/Toni-Kroos.jpg" alt="Toni Kroos">
+    <h3>Toni Kroos Artwork</h3>
+    <div class="details">
+      Digital artwork inspired by Toni Kroos, focusing on precision and composition, using creative color grading.
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://i.ibb.co/fHcbPLk/Zinedine-Zidane.jpg" alt="Zinedine Zidane">
+    <h3>Zinedine Zidane Poster</h3>
+    <div class="details">
+      Iconic Zidane moments captured in a poster design, blending realism with artistic Photoshop techniques.
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://i.ibb.co/0B0RtV2/Vinicius-Jr.jpg" alt="Vinicius Jr">
+    <h3>Vinicius Jr Poster</h3>
+    <div class="details">
+      Action poster of Vinicius Jr, combining Photoshop effects and modern digital techniques for a vibrant result.
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://i.ibb.co/3cXJ9Sz/Luka-Modric.jpg" alt="Luka Modric">
+    <h3>Luka Modric Artwork</h3>
+    <div class="details">
+      Artistic illustration inspired by Luka Modric’s playing style, with attention to detail and motion effects.
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script>
+document.getElementById('backBtn').onclick = () => {
+  window.location.href='index.html';
+};
+</script>
+
+</body>
+</html>
