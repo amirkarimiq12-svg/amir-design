@@ -11,15 +11,13 @@
 :root{
   --navy:#020617;
   --purple:#5b21b6;
-  --gold:rgba(250,204,21,0.08); /* بسیار ملایم */
+  --gold:rgba(250,204,21,0.08);
   --glass1:rgba(255,255,255,.16);
   --glass2:rgba(255,255,255,.06);
   --text:#f8fafc;
   --muted:#c7d2fe;
 }
-
 *{box-sizing:border-box}
-
 body{
   margin:0;
   font-family:Inter,system-ui;
@@ -29,7 +27,6 @@ body{
     radial-gradient(circle at 82% 28%, var(--gold), transparent 55%),
     linear-gradient(180deg,#000014,var(--navy));
 }
-
 body.fa{font-family:Vazirmatn,system-ui}
 
 /* language button */
@@ -44,6 +41,25 @@ body.fa{font-family:Vazirmatn,system-ui}
   color:#fff;
   font-weight:700;
   cursor:pointer;
+}
+
+/* portfolio button */
+#portfolioBtn{
+  position:fixed;
+  top:22px; right:140px;
+  z-index:20;
+  padding:.55rem 1.4rem;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(135deg,#f472b6,#a78bfa);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+#portfolioBtn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
 }
 
 header{
@@ -191,7 +207,11 @@ footer{
 </head>
 <body>
 
+<!-- Language Button -->
 <button id="langBtn">فارسی</button>
+
+<!-- Portfolio Button -->
+<button id="portfolioBtn">نمونه‌کارها</button>
 
 <header>
   <div class="hero">
@@ -300,7 +320,8 @@ const T={
   c2:'Learning Linux',c2d:'A beginner Linux user learning terminal commands, package managers, desktop environments, and system-level concepts step by step.',
   c3:'Technology Curiosity',c3d:'Strong interest in understanding how software, operating systems, and technology work behind the scenes.',
   c4:'Madridista',c4d:"A proud Real Madrid supporter who admires the club's history, winning mentality, and legendary legacy.",
-  social:'Find Me On Social Media',footer:'All Rights Reserved'
+  social:'Find Me On Social Media',footer:'All Rights Reserved',
+  portfolioBtn:'Portfolio'
  },
  fa:{
   btn:'English',name:'امیر دیزاین',
@@ -312,13 +333,15 @@ const T={
   c2:'یادگیری لینوکس',c2d:'تازه‌کار در لینوکس و در حال یادگیری دستورات ترمینال، مدیریت بسته‌ها، محیط‌های دسکتاپ و مفاهیم پایه سیستم.',
   c3:'کنجکاوی تکنولوژی',c3d:'علاقه‌مند به درک نحوه کار نرم‌افزارها، سیستم‌عامل‌ها و فناوری‌های مختلف.',
   c4:'مادریدیستا',c4d:'طرفدار رئال مادرید با علاقه به تاریخ، ذهنیت برنده و میراث افسانه‌ای این باشگاه.',
-  social:'شبکه‌های اجتماعی من',footer:'کلیه حقوق محفوظ است'
+  social:'شبکه‌های اجتماعی من',footer:'کلیه حقوق محفوظ است',
+  portfolioBtn:'نمونه‌کارها'
  }
 };
 
 function setLang(){
  const t=T[lang];
  langBtn.innerText=t.btn;
+ portfolioBtn.innerText=t.portfolioBtn;
  name.innerText=t.name;
  heroText.innerText=t.hero;
  aboutTitle.innerText=t.aboutTitle;
@@ -334,7 +357,15 @@ function setLang(){
  document.body.classList.toggle('fa',lang==='fa');
 }
 
+// Language toggle
+const langBtn=document.getElementById('langBtn');
+const portfolioBtn=document.getElementById('portfolioBtn');
+
 langBtn.onclick=()=>{lang=lang==='en'?'fa':'en';setLang()};
+
+// Portfolio button click
+portfolioBtn.onclick=()=>{window.location.href='nemone.html';};
+
 setLang();
 </script>
 
