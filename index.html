@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<title>Amir Design | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#020617;
+  --purple:#5b21b6;
+  --gold:rgba(250,204,21,0.08); /* بسیار ملایم */
+  --glass1:rgba(255,255,255,.16);
+  --glass2:rgba(255,255,255,.06);
+  --text:#f8fafc;
+  --muted:#c7d2fe;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 18% 20%, var(--purple), transparent 45%),
+    radial-gradient(circle at 82% 28%, var(--gold), transparent 55%),
+    linear-gradient(180deg,#000014,var(--navy));
+}
+
+body.fa{font-family:Vazirmatn,system-ui}
+
+/* language button */
+#langBtn{
+  position:fixed;
+  top:22px;right:22px;
+  z-index:20;
+  padding:.55rem 1.4rem;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(135deg,#6d28d9,#312e81);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+header{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+}
+
+.hero{
+  max-width:1150px;
+  text-align:center;
+  padding:5rem 4rem;
+  border-radius:40px;
+  background:linear-gradient(135deg,var(--glass1),var(--glass2));
+  backdrop-filter:blur(24px);
+  box-shadow:0 60px 140px rgba(0,0,0,.7);
+}
+
+.hero h1{
+  font-size:clamp(3.8rem,8vw,6.4rem);
+  margin:0 0 1.2rem;
+  font-weight:900;
+}
+
+.hero p{
+  font-size:1.35rem;
+  color:var(--muted);
+  max-width:950px;
+  margin:auto;
+}
+
+main{
+  max-width:1400px;
+  margin:auto;
+  padding:6.5rem 1.5rem 3rem;
+}
+
+section{
+  margin-bottom:4.5rem;
+  padding:4rem;
+  border-radius:38px;
+  background:linear-gradient(160deg,var(--glass1),var(--glass2));
+  backdrop-filter:blur(22px);
+  box-shadow:0 40px 100px rgba(0,0,0,.6);
+}
+
+section h2{
+  margin-top:0;
+  font-size:2.5rem;
+  margin-bottom:1.8rem;
+  background:linear-gradient(90deg,#a78bfa,#818cf8);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+section p{max-width:1100px;font-size:1.08rem;line-height:1.9}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2.2rem;
+  margin-top:2.8rem;
+}
+
+.card{
+  background:rgba(255,255,255,.16);
+  border-radius:30px;
+  padding:2.6rem;
+  cursor:pointer;
+  transition:.4s ease;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 35px 80px rgba(0,0,0,.6);
+}
+
+.card h3{margin-top:0;color:#e9d5ff}
+
+.details{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:.4s ease;
+  color:var(--muted);
+  font-size:.96rem;
+  line-height:1.8;
+}
+
+.card:active .details{
+  max-height:300px;
+  opacity:1;
+  margin-top:1rem;
+}
+
+/* social */
+.social-wrap{
+  max-width:1400px;
+  margin:0 auto 3rem;
+  padding:3.5rem;
+  border-radius:38px;
+  background:linear-gradient(160deg,var(--glass1),var(--glass2));
+  backdrop-filter:blur(22px);
+  box-shadow:0 40px 100px rgba(0,0,0,.6);
+  text-align:center;
+}
+
+.social-grid{
+  display:flex;
+  justify-content:center;
+  gap:2.2rem;
+  flex-wrap:wrap;
+  margin-top:2.4rem;
+}
+
+.social{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  padding:1rem 1.5rem;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:600;
+  transition:.35s ease;
+}
+
+.social svg{width:22px;height:22px;fill:#e9d5ff}
+
+.social:hover{
+  transform:translateY(-4px);
+  background:rgba(255,255,255,.26);
+}
+
+footer{
+  text-align:center;
+  padding:2.5rem 1.5rem 4rem;
+  color:var(--muted);
+  font-size:.95rem;
+}
+</style>
+</head>
+<body>
+
+<button id="langBtn">فارسی</button>
+
+<header>
+  <div class="hero">
+    <h1 id="name">Amir Design</h1>
+    <p id="heroText">
+      Beginner Linux user and Photoshop designer, building a creative identity
+      by combining visual design, curiosity for technology, and continuous
+      learning.
+    </p>
+  </div>
+</header>
+
+<main>
+<section>
+  <h2 id="aboutTitle">About Me</h2>
+  <p id="aboutText">
+    I am Amir, a Photoshop designer focused on visual creativity, photo
+    manipulation, and digital artwork. Alongside design, I am learning Linux
+    from the ground up, exploring terminals, desktop environments, and system
+    fundamentals. I believe real growth comes from curiosity, practice, and
+    patience.
+  </p>
+</section>
+
+<section>
+  <h2 id="focusTitle">My Focus Areas</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3 id="c1">Photoshop & Design</h3>
+      <div class="details" id="c1d">
+        Professional photo editing, poster design, color grading, typography,
+        and creative digital compositions. Design is my primary creative field.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 id="c2">Learning Linux</h3>
+      <div class="details" id="c2d">
+        A beginner Linux user learning terminal commands, package managers,
+        desktop environments, and system-level concepts step by step.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 id="c3">Technology Curiosity</h3>
+      <div class="details" id="c3d">
+        Strong interest in understanding how software, operating systems,
+        and technology work behind the scenes.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 id="c4">Madridista</h3>
+      <div class="details" id="c4d">
+        A proud Real Madrid supporter who admires the club's history, winning
+        mentality, and legendary legacy.
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<div class="social-wrap">
+  <h2 id="socialTitle">Find Me On Social Media</h2>
+  <div class="social-grid">
+
+    <a href="https://t.me/Amirlecter01" target="_blank" class="social">
+      <svg viewBox="0 0 24 24"><path d="M9.04 15.46 8.9 19c.57 0 .82-.25 1.13-.55l2.71-2.6 5.62 4.11c1.03.57 1.77.27 2.03-.95L23.9 4.92c.31-1.46-.53-2.04-1.54-1.67L1.7 11.05c-1.41.55-1.39 1.33-.24 1.69l5.9 1.84L19.8 7.1c.59-.39 1.13-.18.69.21z"/></svg>
+      <span>@Amirlecter01</span>
+    </a>
+
+    <a href="https://instagram.com/amirkarimi" target="_blank" class="social">
+      <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm6.1-.8a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/></svg>
+      <span>@amirkarimi</span>
+    </a>
+
+    <a href="https://x.com/karimiQ12" target="_blank" class="social">
+      <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.7l-5.3-6.9L4.9 22H2l8-9.2L1.6 2h6.8l4.8 6.3z"/></svg>
+      <span>@karimiQ12</span>
+    </a>
+
+    <a href="mailto:amirkarimiq12@gmail.com" class="social">
+      <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2zM4 6l8 5 8-5"/></svg>
+      <span>amirkarimiq12@gmail.com</span>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 Amir Design — <span id="footerText">All Rights Reserved</span>
+</footer>
+
+<script>
+let lang='en';
+const T={
+ en:{
+  btn:'فارسی',name:'Amir Design',
+  hero:'Beginner Linux user and Photoshop designer, building a creative identity by combining visual design, curiosity for technology, and continuous learning.',
+  aboutTitle:'About Me',
+  about:'I am Amir, a Photoshop designer focused on visual creativity, photo manipulation, and digital artwork. Alongside design, I am learning Linux from the ground up, exploring terminals, desktop environments, and system fundamentals. I believe real growth comes from curiosity, practice, and patience.',
+  focus:'My Focus Areas',
+  c1:'Photoshop & Design',c1d:'Professional photo editing, poster design, color grading, typography, and creative digital compositions. Design is my primary creative field.',
+  c2:'Learning Linux',c2d:'A beginner Linux user learning terminal commands, package managers, desktop environments, and system-level concepts step by step.',
+  c3:'Technology Curiosity',c3d:'Strong interest in understanding how software, operating systems, and technology work behind the scenes.',
+  c4:'Madridista',c4d:"A proud Real Madrid supporter who admires the club's history, winning mentality, and legendary legacy.",
+  social:'Find Me On Social Media',footer:'All Rights Reserved'
+ },
+ fa:{
+  btn:'English',name:'امیر دیزاین',
+  hero:'کاربر تازه‌کار لینوکس و طراح فتوشاپ که در حال ساخت هویت حرفه‌ای خود با ترکیب طراحی بصری، علاقه به تکنولوژی و یادگیری مداوم است.',
+  aboutTitle:'درباره من',
+  about:'من امیر هستم، طراح فتوشاپ با تمرکز بر خلاقیت بصری، ادیت عکس و طراحی دیجیتال. در کنار طراحی، یادگیری لینوکس را از پایه شروع کرده‌ام و با مفاهیمی مثل ترمینال، محیط‌های دسکتاپ و ساختار سیستم آشنا می‌شوم. پیشرفت برای من نتیجه کنجکاوی، تمرین و صبر است.',
+  focus:'زمینه‌های تمرکز من',
+  c1:'فتوشاپ و طراحی',c1d:'ادیت حرفه‌ای عکس، طراحی پوستر، اصلاح رنگ، تایپوگرافی و ساخت ترکیب‌های دیجیتال خلاقانه.',
+  c2:'یادگیری لینوکس',c2d:'تازه‌کار در لینوکس و در حال یادگیری دستورات ترمینال، مدیریت بسته‌ها، محیط‌های دسکتاپ و مفاهیم پایه سیستم.',
+  c3:'کنجکاوی تکنولوژی',c3d:'علاقه‌مند به درک نحوه کار نرم‌افزارها، سیستم‌عامل‌ها و فناوری‌های مختلف.',
+  c4:'مادریدیستا',c4d:'طرفدار رئال مادرید با علاقه به تاریخ، ذهنیت برنده و میراث افسانه‌ای این باشگاه.',
+  social:'شبکه‌های اجتماعی من',footer:'کلیه حقوق محفوظ است'
+ }
+};
+
+function setLang(){
+ const t=T[lang];
+ langBtn.innerText=t.btn;
+ name.innerText=t.name;
+ heroText.innerText=t.hero;
+ aboutTitle.innerText=t.aboutTitle;
+ aboutText.innerText=t.about;
+ focusTitle.innerText=t.focus;
+ c1.innerText=t.c1; c1d.innerText=t.c1d;
+ c2.innerText=t.c2; c2d.innerText=t.c2d;
+ c3.innerText=t.c3; c3d.innerText=t.c3d;
+ c4.innerText=t.c4; c4d.innerText=t.c4d;
+ socialTitle.innerText=t.social;
+ footerText.innerText=t.footer;
+ document.documentElement.dir=lang==='fa'?'rtl':'ltr';
+ document.body.classList.toggle('fa',lang==='fa');
+}
+
+langBtn.onclick=()=>{lang=lang==='en'?'fa':'en';setLang()};
+setLang();
+</script>
+
+</body>
+</html>
