@@ -1,373 +1,316 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8" />
-<title>Amir Design | Portfolio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amir Design | Digital Empire</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500&family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #06b6d4;
+            --bg-dark: #030305;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --font-en: 'Inter', sans-serif;
+            --font-fa: 'Vazirmatn', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
 
-<style>
-:root{
-  --navy:#020617;
-  --purple:#5b21b6;
-  --gold:rgba(250,204,21,0.08);
-  --glass1:rgba(255,255,255,.16);
-  --glass2:rgba(255,255,255,.06);
-  --text:#f8fafc;
-  --muted:#c7d2fe;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,system-ui;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 18% 20%, var(--purple), transparent 45%),
-    radial-gradient(circle at 82% 28%, var(--gold), transparent 55%),
-    linear-gradient(180deg,#000014,var(--navy));
-}
-body.fa{font-family:Vazirmatn,system-ui}
+        /* Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-en);
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: default; /* برگشت به حالت عادی */
+        }
 
-/* language button */
-#langBtn{
-  position:fixed;
-  top:22px;right:22px;
-  z-index:20;
-  padding:.55rem 1.4rem;
-  border:none;
-  border-radius:999px;
-  background:linear-gradient(135deg,#6d28d9,#312e81);
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-}
+        html[lang="fa"] body { font-family: var(--font-fa); }
 
-/* portfolio button */
-#portfolioBtn{
-  position:fixed;
-  top:22px; right:140px;
-  z-index:20;
-  padding:.55rem 1.4rem;
-  border:none;
-  border-radius:999px;
-  background:linear-gradient(135deg,#f472b6,#a78bfa);
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-  transition:.3s;
-}
-#portfolioBtn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 6px 18px rgba(0,0,0,.35);
-}
+        /* Background Graphics */
+        #stars-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+        .vignette { position: fixed; inset: 0; background: radial-gradient(circle, transparent 20%, #000 100%); z-index: -1; }
 
-header{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:2rem;
-}
+        /* Glass Utility */
+        .glass-box {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-box:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2); }
 
-.hero{
-  max-width:1150px;
-  text-align:center;
-  padding:5rem 4rem;
-  border-radius:40px;
-  background:linear-gradient(135deg,var(--glass1),var(--glass2));
-  backdrop-filter:blur(24px);
-  box-shadow:0 60px 140px rgba(0,0,0,.7);
-}
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; border-bottom: 1px solid var(--glass-border);
+            background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(10px);
+        }
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--primary); }
 
-.hero h1{
-  font-size:clamp(3.8rem,8vw,6.4rem);
-  margin:0 0 1.2rem;
-  font-weight:900;
-}
+        /* Hero & Identity Card */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 5% 50px; }
+        
+        .main-card {
+            width: 100%; max-width: 1100px; padding: 60px;
+            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;
+        }
 
-.hero p{
-  font-size:1.35rem;
-  color:var(--muted);
-  max-width:950px;
-  margin:auto;
-}
+        .hero-info h2 { font-family: var(--font-mono); color: var(--secondary); font-size: 0.9rem; margin-bottom: 15px; letter-spacing: 2px; }
+        .hero-info h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; margin-bottom: 25px; line-height: 1; }
+        .hero-info p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 35px; max-width: 500px; }
 
-main{
-  max-width:1400px;
-  margin:auto;
-  padding:6.5rem 1.5rem 3rem;
-}
+        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+        .tag { padding: 6px 16px; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 50px; font-size: 0.85rem; color: #ddd; font-weight: 600; }
 
-section{
-  margin-bottom:4.5rem;
-  padding:4rem;
-  border-radius:38px;
-  background:linear-gradient(160deg,var(--glass1),var(--glass2));
-  backdrop-filter:blur(22px);
-  box-shadow:0 40px 100px rgba(0,0,0,.6);
-}
+        /* Social Icons */
+        .social-bar { display: flex; gap: 15px; margin-top: 20px; }
+        .social-link {
+            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: white; font-size: 1.2rem;
+            border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+            transition: 0.3s;
+        }
+        .social-link:hover { background: var(--primary); transform: scale(1.1); box-shadow: 0 0 20px var(--primary); }
 
-section h2{
-  margin-top:0;
-  font-size:2.5rem;
-  margin-bottom:1.8rem;
-  background:linear-gradient(90deg,#a78bfa,#818cf8);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+        /* Terminal Section */
+        .terminal-box {
+            background: #0d0d12; border-radius: 15px; padding: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); font-family: var(--font-mono); border: 1px solid #222;
+        }
+        .term-header { display: flex; gap: 8px; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .term-dot { width: 12px; height: 12px; border-radius: 50%; }
 
-section p{max-width:1100px;font-size:1.08rem;line-height:1.9}
+        /* Portfolio Button */
+        .btn-portfolio {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 16px 40px; border-radius: 12px; color: white;
+            text-decoration: none; font-weight: 800; font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4); transition: 0.3s;
+        }
+        .btn-portfolio:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(6, 182, 212, 0.5); }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:2.2rem;
-  margin-top:2.8rem;
-}
+        /* About Grid */
+        .about-section { padding: 100px 5%; }
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .about-card { padding: 40px; text-align: center; }
+        .about-card i { font-size: 3rem; color: var(--secondary); margin-bottom: 20px; }
+        .about-card h3 { margin-bottom: 15px; font-size: 1.5rem; }
 
-.card{
-  background:rgba(255,255,255,.16);
-  border-radius:30px;
-  padding:2.6rem;
-  cursor:pointer;
-  transition:.4s ease;
-}
+        /* Controls */
+        .controls { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; }
+        .btn-ctrl {
+            width: 55px; height: 55px; border-radius: 15px; border: none;
+            background: var(--primary); color: white; cursor: pointer; font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
 
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 35px 80px rgba(0,0,0,.6);
-}
+        /* RTL Adjustments */
+        html[lang="fa"] .hero-info { text-align: right; }
+        html[lang="fa"] .main-card { direction: rtl; }
+        html[lang="fa"] .tag-container { direction: rtl; }
 
-.card h3{margin-top:0;color:#e9d5ff}
-
-.details{
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  transition:.4s ease;
-  color:var(--muted);
-  font-size:.96rem;
-  line-height:1.8;
-}
-
-.card:active .details{
-  max-height:300px;
-  opacity:1;
-  margin-top:1rem;
-}
-
-/* social */
-.social-wrap{
-  max-width:1400px;
-  margin:0 auto 3rem;
-  padding:3.5rem;
-  border-radius:38px;
-  background:linear-gradient(160deg,var(--glass1),var(--glass2));
-  backdrop-filter:blur(22px);
-  box-shadow:0 40px 100px rgba(0,0,0,.6);
-  text-align:center;
-}
-
-.social-grid{
-  display:flex;
-  justify-content:center;
-  gap:2.2rem;
-  flex-wrap:wrap;
-  margin-top:2.4rem;
-}
-
-.social{
-  display:flex;
-  align-items:center;
-  gap:.7rem;
-  padding:1rem 1.5rem;
-  border-radius:999px;
-  background:rgba(255,255,255,.16);
-  color:var(--text);
-  text-decoration:none;
-  font-weight:600;
-  transition:.35s ease;
-}
-
-.social svg{width:22px;height:22px;fill:#e9d5ff}
-
-.social:hover{
-  transform:translateY(-4px);
-  background:rgba(255,255,255,.26);
-}
-
-footer{
-  text-align:center;
-  padding:2.5rem 1.5rem 4rem;
-  color:var(--muted);
-  font-size:.95rem;
-}
-</style>
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-card { grid-template-columns: 1fr; padding: 40px 20px; text-align: center; }
+            .hero-info p { margin: 0 auto 35px; }
+            .tag-container, .social-bar { justify-content: center; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Language Button -->
-<button id="langBtn">فارسی</button>
+    <canvas id="stars-canvas"></canvas>
+    <div class="vignette"></div>
 
-<!-- Portfolio Button -->
-<button id="portfolioBtn">نمونه‌کارها</button>
+    <nav>
+        <div class="logo">
+            <i class="fa-solid fa-ghost"></i> <span data-i18n="brand">AMIR DESIGN</span>
+        </div>
+        <a href="nemone.html" class="btn-portfolio" style="padding: 10px 25px; font-size: 0.9rem;">
+            <i class="fa-solid fa-briefcase"></i> <span data-i18n="nav_portfolio">Portfolio</span>
+        </a>
+    </nav>
 
-<header>
-  <div class="hero">
-    <h1 id="name">Amir Design</h1>
-    <p id="heroText">
-      Beginner Linux user and Photoshop designer, building a creative identity
-      by combining visual design, curiosity for technology, and continuous
-      learning.
-    </p>
-  </div>
-</header>
-
-<main>
-<section>
-  <h2 id="aboutTitle">About Me</h2>
-  <p id="aboutText">
-    I am Amir, a Photoshop designer focused on visual creativity, photo
-    manipulation, and digital artwork. Alongside design, I am learning Linux
-    from the ground up, exploring terminals, desktop environments, and system
-    fundamentals. I believe real growth comes from curiosity, practice, and
-    patience.
-  </p>
-</section>
-
-<section>
-  <h2 id="focusTitle">My Focus Areas</h2>
-  <div class="grid">
-
-    <div class="card">
-      <h3 id="c1">Photoshop & Design</h3>
-      <div class="details" id="c1d">
-        Professional photo editing, poster design, color grading, typography,
-        and creative digital compositions. Design is my primary creative field.
-      </div>
+    <div class="controls">
+        <button class="btn-ctrl" id="lang-btn">FA</button>
+        <button class="btn-ctrl" onclick="window.scrollTo(0,0)"><i class="fa-solid fa-chevron-up"></i></button>
     </div>
 
-    <div class="card">
-      <h3 id="c2">Learning Linux</h3>
-      <div class="details" id="c2d">
-        A beginner Linux user learning terminal commands, package managers,
-        desktop environments, and system-level concepts step by step.
-      </div>
-    </div>
+    <section class="hero">
+        <div class="glass-box main-card">
+            <div class="hero-info">
+                <h2 data-i18n="hero_sub">SYSTEM OPERATOR</h2>
+                <h1 class="text-gradient" data-i18n="hero_title">Digital Empire</h1>
+                <p data-i18n="hero_desc">
+                    18-year-old creator and Madridista. Specialized in High-End Photoshop Manipulation and Linux systems explorer. Building the future one pixel at a time.
+                </p>
+                
+                <div class="tag-container">
+                    <span class="tag">#18_Years_Old</span>
+                    <span class="tag">#Madridista</span>
+                    <span class="tag">#Photoshop_Pro</span>
+                    <span class="tag">#Linux_User</span>
+                    <span class="tag">#Creative_Mind</span>
+                </div>
 
-    <div class="card">
-      <h3 id="c3">Technology Curiosity</h3>
-      <div class="details" id="c3d">
-        Strong interest in understanding how software, operating systems,
-        and technology work behind the scenes.
-      </div>
-    </div>
+                <div class="btn-group" style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                    <a href="nemone.html" class="btn-portfolio">
+                        <i class="fa-solid fa-rocket"></i> <span data-i18n="btn_portfolio">Portfolio</span>
+                    </a>
+                    
+                    <div class="social-bar">
+                        <a href="https://instagram.com/your_id" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://t.me/your_id" class="social-link" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://x.com/your_id" class="social-link" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="mailto:your@email.com" class="social-link" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
 
-    <div class="card">
-      <h3 id="c4">Madridista</h3>
-      <div class="details" id="c4d">
-        A proud Real Madrid supporter who admires the club's history, winning
-        mentality, and legendary legacy.
-      </div>
-    </div>
+            <div class="terminal-box">
+                <div class="term-header">
+                    <div class="term-dot" style="background: #ff5f56;"></div>
+                    <div class="term-dot" style="background: #ffbd2e;"></div>
+                    <div class="term-dot" style="background: #27c93f;"></div>
+                    <span style="font-size: 0.7rem; color: #555; margin-left: 10px;">bash — amir@digital-empire</span>
+                </div>
+                <div id="typewriter" style="color: #a9b1d6; font-size: 0.85rem; line-height: 1.8;"></div>
+            </div>
+        </div>
+    </section>
 
-  </div>
-</section>
-</main>
+    <section class="about-section container">
+        <div class="about-grid">
+            <div class="glass-box about-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3 data-i18n="about_1_h">Real Madridista</h3>
+                <p data-i18n="about_1_p">White blood in my veins. Loyal to the greatest club in history. Hala Madrid y nada más!</p>
+            </div>
+            <div class="glass-box about-card">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3 data-i18n="about_2_h">Photoshop Expert</h3>
+                <p data-i18n="about_2_p">Transforming imagination into reality through advanced photo manipulation and digital art.</p>
+            </div>
+            <div class="glass-box about-card">
+                <i class="fa-brands fa-linux"></i>
+                <h3 data-i18n="about_3_h">Linux Learner</h3>
+                <p data-i18n="about_3_p">Diving into the open-source world. Mastering the terminal and exploring system architectures.</p>
+            </div>
+        </div>
+    </section>
 
-<div class="social-wrap">
-  <h2 id="socialTitle">Find Me On Social Media</h2>
-  <div class="social-grid">
+    <footer style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--glass-border);">
+        <span data-i18n="footer">© 2026 Amir Design | Built with Code & Passion</span>
+    </footer>
 
-    <a href="https://t.me/Amirlecter01" target="_blank" class="social">
-      <svg viewBox="0 0 24 24"><path d="M9.04 15.46 8.9 19c.57 0 .82-.25 1.13-.55l2.71-2.6 5.62 4.11c1.03.57 1.77.27 2.03-.95L23.9 4.92c.31-1.46-.53-2.04-1.54-1.67L1.7 11.05c-1.41.55-1.39 1.33-.24 1.69l5.9 1.84L19.8 7.1c.59-.39 1.13-.18.69.21z"/></svg>
-      <span>@Amirlecter01</span>
-    </a>
+    <script>
+        const translations = {
+            en: {
+                brand: "AMIR DESIGN",
+                nav_portfolio: "Portfolio",
+                hero_sub: "SYSTEM OPERATOR",
+                hero_title: "Digital Empire",
+                hero_desc: "18-year-old creator and Madridista. Specialized in High-End Photoshop Manipulation and Linux systems explorer. Building the future one pixel at a time.",
+                btn_portfolio: "Open Portfolio",
+                about_1_h: "Real Madridista",
+                about_1_p: "White blood in my veins. Loyal to the greatest club in history. Hala Madrid y nada más!",
+                about_2_h: "Photoshop Expert",
+                about_2_p: "Transforming imagination into reality through advanced photo manipulation and digital art.",
+                about_3_h: "Linux Learner",
+                about_3_p: "Diving into the open-source world. Mastering the terminal and exploring system architectures.",
+                footer: "© 2026 Amir Design | Built with Code & Passion",
+                term: "> FETCH profile\n> NAME: Amir\n> AGE: 18\n> HOBBY: PS Manipulation\n> TEAM: Real Madrid\n> OS: Linux Learning...\n> STATUS: Evolution in progress"
+            },
+            fa: {
+                brand: "امیر دیزاین",
+                nav_portfolio: "نمونه‌کارها",
+                hero_sub: "اپراتور سیستم",
+                hero_title: "امپراتوری دیجیتال",
+                hero_desc: "خالق ۱۸ ساله و مادریدیستا. متخصص حرفه‌ای فتوشاپ و کاوشگر سیستم‌های لینوکس. ساختن آینده، پیکسل به پیکسل.",
+                btn_portfolio: "مشاهده پروژه‌ها",
+                about_1_h: "مادریدیستای واقعی",
+                about_1_p: "خون سفید در رگ‌های من. وفادار به بزرگترین باشگاه تاریخ. هالا مادرید!",
+                about_2_h: "استاد فتوشاپ",
+                about_2_p: "تبدیل تخیل به واقعیت از طریق ویرایش‌های پیشرفته و هنر دیجیتال.",
+                about_3_h: "آموزش لینوکس",
+                about_3_p: "غرق شدن در دنیای متن‌باز. تسلط بر ترمینال و کاوش در معماری سیستم.",
+                footer: "© ۲۰۲۶ امیر دیزاین | ساخته شده با کد و اشتیاق",
+                term: "> فراخوانی پروفایل\n> نام: امیر\n> سن: ۱۸\n> سرگرمی: فتوشاپ حرفه‌ای\n> تیم: رئال مادرید\n> سیستم: در حال یادگیری لینوکس\n> وضعیت: در حال تکامل..."
+            }
+        };
 
-    <a href="https://instagram.com/amirkarimi" target="_blank" class="social">
-      <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm6.1-.8a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/></svg>
-      <span>@amirkarimi</span>
-    </a>
+        let lang = 'en';
+        const langBtn = document.getElementById('lang-btn');
 
-    <a href="https://x.com/karimiQ12" target="_blank" class="social">
-      <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.7l-5.3-6.9L4.9 22H2l8-9.2L1.6 2h6.8l4.8 6.3z"/></svg>
-      <span>@karimiQ12</span>
-    </a>
+        function updateLang() {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'fa' ? 'rtl' : 'ltr');
+            langBtn.textContent = (lang === 'en' ? 'FA' : 'EN');
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = translations[lang][key];
+            });
+            typeWriter();
+        }
 
-    <a href="mailto:amirkarimiq12@gmail.com" class="social">
-      <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2zM4 6l8 5 8-5"/></svg>
-      <span>amirkarimiq12@gmail.com</span>
-    </a>
+        langBtn.onclick = () => {
+            lang = (lang === 'en' ? 'fa' : 'en');
+            updateLang();
+        };
 
-  </div>
-</div>
+        // Typewriter
+        let i = 0;
+        function typeWriter() {
+            const text = translations[lang].term;
+            const container = document.getElementById('typewriter');
+            container.innerHTML = '';
+            let j = 0;
+            function type() {
+                if (j < text.length) {
+                    container.innerHTML += (text.charAt(j) === '\n' ? '<br>' : text.charAt(j));
+                    j++;
+                    setTimeout(type, 30);
+                }
+            }
+            type();
+        }
 
-<footer>
-  © 2026 Amir Design — <span id="footerText">All Rights Reserved</span>
-</footer>
+        // Starfield Canvas
+        const canvas = document.getElementById('stars-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = resize; resize();
 
-<script>
-let lang='en';
-const T={
- en:{
-  btn:'فارسی',name:'Amir Design',
-  hero:'Beginner Linux user and Photoshop designer, building a creative identity by combining visual design, curiosity for technology, and continuous learning.',
-  aboutTitle:'About Me',
-  about:'I am Amir, a Photoshop designer focused on visual creativity, photo manipulation, and digital artwork. Alongside design, I am learning Linux from the ground up, exploring terminals, desktop environments, and system fundamentals. I believe real growth comes from curiosity, practice, and patience.',
-  focus:'My Focus Areas',
-  c1:'Photoshop & Design',c1d:'Professional photo editing, poster design, color grading, typography, and creative digital compositions. Design is my primary creative field.',
-  c2:'Learning Linux',c2d:'A beginner Linux user learning terminal commands, package managers, desktop environments, and system-level concepts step by step.',
-  c3:'Technology Curiosity',c3d:'Strong interest in understanding how software, operating systems, and technology work behind the scenes.',
-  c4:'Madridista',c4d:"A proud Real Madrid supporter who admires the club's history, winning mentality, and legendary legacy.",
-  social:'Find Me On Social Media',footer:'All Rights Reserved',
-  portfolioBtn:'Portfolio'
- },
- fa:{
-  btn:'English',name:'امیر دیزاین',
-  hero:'کاربر تازه‌کار لینوکس و طراح فتوشاپ که در حال ساخت هویت حرفه‌ای خود با ترکیب طراحی بصری، علاقه به تکنولوژی و یادگیری مداوم است.',
-  aboutTitle:'درباره من',
-  about:'من امیر هستم، طراح فتوشاپ با تمرکز بر خلاقیت بصری، ادیت عکس و طراحی دیجیتال. در کنار طراحی، یادگیری لینوکس را از پایه شروع کرده‌ام و با مفاهیمی مثل ترمینال، محیط‌های دسکتاپ و ساختار سیستم آشنا می‌شوم. پیشرفت برای من نتیجه کنجکاوی، تمرین و صبر است.',
-  focus:'زمینه‌های تمرکز من',
-  c1:'فتوشاپ و طراحی',c1d:'ادیت حرفه‌ای عکس، طراحی پوستر، اصلاح رنگ، تایپوگرافی و ساخت ترکیب‌های دیجیتال خلاقانه.',
-  c2:'یادگیری لینوکس',c2d:'تازه‌کار در لینوکس و در حال یادگیری دستورات ترمینال، مدیریت بسته‌ها، محیط‌های دسکتاپ و مفاهیم پایه سیستم.',
-  c3:'کنجکاوی تکنولوژی',c3d:'علاقه‌مند به درک نحوه کار نرم‌افزارها، سیستم‌عامل‌ها و فناوری‌های مختلف.',
-  c4:'مادریدیستا',c4d:'طرفدار رئال مادرید با علاقه به تاریخ، ذهنیت برنده و میراث افسانه‌ای این باشگاه.',
-  social:'شبکه‌های اجتماعی من',footer:'کلیه حقوق محفوظ است',
-  portfolioBtn:'نمونه‌کارها'
- }
-};
+        for(let i=0; i<150; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, size: Math.random()*2, spd: Math.random()*0.5});
 
-function setLang(){
- const t=T[lang];
- langBtn.innerText=t.btn;
- portfolioBtn.innerText=t.portfolioBtn;
- name.innerText=t.name;
- heroText.innerText=t.hero;
- aboutTitle.innerText=t.aboutTitle;
- aboutText.innerText=t.about;
- focusTitle.innerText=t.focus;
- c1.innerText=t.c1; c1d.innerText=t.c1d;
- c2.innerText=t.c2; c2d.innerText=t.c2d;
- c3.innerText=t.c3; c3d.innerText=t.c3d;
- c4.innerText=t.c4; c4d.innerText=t.c4d;
- socialTitle.innerText=t.social;
- footerText.innerText=t.footer;
- document.documentElement.dir=lang==='fa'?'rtl':'ltr';
- document.body.classList.toggle('fa',lang==='fa');
-}
-
-// Language toggle
-const langBtn=document.getElementById('langBtn');
-const portfolioBtn=document.getElementById('portfolioBtn');
-
-langBtn.onclick=()=>{lang=lang==='en'?'fa':'en';setLang()};
-
-// Portfolio button click
-portfolioBtn.onclick=()=>{window.location.href='nemone.html';};
-
-setLang();
-</script>
-
+        function animate() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            ctx.fillStyle = "rgba(139, 92, 246, 0.5)";
+            stars.forEach(s => {
+                s.y -= s.spd; if(s.y < 0) s.y = canvas.height;
+                ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI*2); ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+        updateLang();
+    </script>
 </body>
 </html>
