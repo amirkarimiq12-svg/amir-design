@@ -1,178 +1,160 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<title>Amir Design | Portfolio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Gallery | Amir Design</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --accent: #c3a65a;
+            --bg: #050508;
+            --border: rgba(255, 255, 255, 0.05);
+        }
 
-<style>
-:root{
-  --navy:#020617;
-  --purple:#5b21b6;
-  --glass1:rgba(255,255,255,.16);
-  --glass2:rgba(255,255,255,.06);
-  --text:#f8fafc;
-  --muted:#c7d2fe;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,system-ui;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 18% 20%, var(--purple), transparent 45%),
-    radial-gradient(circle at 82% 28%, rgba(250,204,21,0.08), transparent 55%),
-    linear-gradient(180deg,#000014,#020617);
-}
-body.fa{font-family:Vazirmatn,system-ui}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg);
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
 
-header{
-  padding:4rem 2rem;
-  text-align:center;
-}
-header h1{
-  font-size:3rem;
-  margin-bottom:.5rem;
-}
-header p{
-  color:var(--muted);
-  font-size:1.2rem;
-  max-width:850px;
-  margin:auto;
-}
+        /* Header */
+        header {
+            padding: 40px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:2.5rem;
-  padding:3rem 2rem;
-  justify-items:center;
-}
+        .back-home {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
 
-.card{
-  background:rgba(255,255,255,.16);
-  border-radius:30px;
-  padding:1.5rem;
-  cursor:pointer;
-  transition:.4s ease;
-  text-align:center;
-  width:100%;
-  max-width:400px;
-}
-.card img{
-  width:100%;
-  height:320px;
-  object-fit:cover;
-  border-radius:20px;
-  margin-bottom:1rem;
-}
-.card h3{
-  margin:0 0 .5rem;
-  color:#e9d5ff;
-  font-size:1.3rem;
-}
-.details{
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  transition:.4s ease;
-  color:var(--muted);
-  font-size:.95rem;
-  line-height:1.6;
-}
-.card:active .details{
-  max-height:250px;
-  opacity:1;
-  margin-top:.8rem;
-}
+        .back-home:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
 
-button#backBtn{
-  position:fixed;
-  top:22px;
-  left:22px;
-  padding:.55rem 1.4rem;
-  border:none;
-  border-radius:999px;
-  background:linear-gradient(135deg,#6d28d9,#312e81);
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-  z-index:20;
-}
-</style>
+        /* Gallery Grid - Max 2 per row */
+        .gallery-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* فقط ۲ تا در هر ردیف */
+            gap: 40px;
+        }
+
+        .art-card {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Ratio */
+            background: #111;
+            border-radius: 15px;
+            overflow: hidden;
+            display: block;
+            border: 1px solid var(--border);
+            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .art-card img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: 0.8s;
+        }
+
+        /* Hover Effects */
+        .art-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.5);
+        }
+
+        .art-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Lighting Overlay */
+        .art-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(139, 92, 246, 0.1), transparent);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .art-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr; /* در موبایل یکی یکی نشان داده شود */
+                gap: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<button id="backBtn">بازگشت / Back</button>
+    <header>
+        <a href="index.html" class="back-home" title="بازگشت">
+            <i class="fa-solid fa-house"></i>
+        </a>
+        <div style="color: #444; font-family: sans-serif; font-weight: 900; letter-spacing: 5px;">VISUAL SHOWCASE</div>
+    </header>
 
-<header>
-  <h1 id="title">Portfolio</h1>
-  <p id="subtitle">
-    A collection of Real Madrid inspired designs and artwork created by Amir Design.
-  </p>
-</header>
+    <main class="gallery-container">
+        <div class="grid">
+            
+            <a href="mbappe.html" class="art-card">
+                <img src="https://e0.365dm.com/24/07/1600x900/skysports-kylian-mbappe-real-madrid_6628236.jpg" alt="Mbappe">
+            </a>
 
-<main>
-<div class="grid">
+            <a href="vinicius.html" class="art-card">
+                <img src="https://icdn.football-espana.net/wp-content/uploads/2024/05/Vinicius-Junior-12.jpg" alt="Vinicius">
+            </a>
 
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Real Madrid Logo">
-    <h3>Real Madrid Logo Design</h3>
-    <div class="details">
-      Creative redesign and high-quality rendition of the Real Madrid logo, exploring modern digital techniques.
-    </div>
-  </div>
+            <a href="jude.html" class="art-card">
+                <img src="https://phantom-marca.unidadeditorial.es/755c0628e93813a863584860b240459a/crop/0x0/2043x1150/resize/1320/f/jpg/assets/multimedia/imagenes/2023/11/26/17010260783329.jpg" alt="Bellingham">
+            </a>
 
-  <div class="card">
-    <img src="https://i.ibb.co/wB6x7rn/Cristiano-Ronaldo.jpg" alt="Cristiano Ronaldo">
-    <h3>Cristiano Ronaldo Poster</h3>
-    <div class="details">
-      Action poster of Cristiano Ronaldo, showcasing speed, skill, and iconic moments with Photoshop effects.
-    </div>
-  </div>
+            <a href="rodrygo.html" class="art-card">
+                <img src="https://images2.minutemediacdn.com/image/upload/c_fill,w_1440,ar_16:9,f_auto,q_auto,g_auto/76/211/01j0pcrj9b3x01hg6a2z.jpg" alt="Rodrygo">
+            </a>
 
-  <div class="card">
-    <img src="https://i.ibb.co/4ZJXQXT/Toni-Kroos.jpg" alt="Toni Kroos">
-    <h3>Toni Kroos Artwork</h3>
-    <div class="details">
-      Digital artwork inspired by Toni Kroos, focusing on precision and composition, using creative color grading.
-    </div>
-  </div>
+            <a href="arda.html" class="art-card">
+                <img src="https://cdn.maviadin.com/wp-content/uploads/2024/05/Arda-Guler-Real-Madridde-tarih-yazdi-Iste-Arda-Gulerin-Real-Madrid-karnesi.jpg" alt="Arda Guler">
+            </a>
 
-  <div class="card">
-    <img src="https://i.ibb.co/fHcbPLk/Zinedine-Zidane.jpg" alt="Zinedine Zidane">
-    <h3>Zinedine Zidane Poster</h3>
-    <div class="details">
-      Iconic Zidane moments captured in a poster design, blending realism with artistic Photoshop techniques.
-    </div>
-  </div>
+            <a href="valverde.html" class="art-card">
+                <img src="https://onefootball.com/_next/image?url=https%3A%2F%2Fimages.daznservices.com%2Fdi%2Flibrary%2FGOAL%2F9b%2Ffe%2Ffede-valverde-real-madrid-2023-24_15d4sxtvbt2801v8n3766onv0u.jpg%3Ft%3D-1582046422%26quality%3D60%26w%3D1600&w=1920&q=75" alt="Valverde">
+            </a>
 
-  <div class="card">
-    <img src="https://i.ibb.co/0B0RtV2/Vinicius-Jr.jpg" alt="Vinicius Jr">
-    <h3>Vinicius Jr Poster</h3>
-    <div class="details">
-      Action poster of Vinicius Jr, combining Photoshop effects and modern digital techniques for a vibrant result.
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://i.ibb.co/3cXJ9Sz/Luka-Modric.jpg" alt="Luka Modric">
-    <h3>Luka Modric Artwork</h3>
-    <div class="details">
-      Artistic illustration inspired by Luka Modric’s playing style, with attention to detail and motion effects.
-    </div>
-  </div>
-
-</div>
-</main>
-
-<script>
-document.getElementById('backBtn').onclick = () => {
-  window.location.href='index.html';
-};
-</script>
+        </div>
+    </main>
 
 </body>
 </html>
